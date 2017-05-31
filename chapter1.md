@@ -18,5 +18,20 @@
 
 Django可以完美运行在Python2.7和3.x版本环境下，本书代码均在Python3里。如果你使用的是Linux和Mac OS X，Python默认已经安装好了。如果你确定自己的电脑是否安装了Python，可以在命令行中输入python，如果你看到类似如下输出，则表示已经安装：
 
+```py
+Python 3.4.1 (default, Jun  6 2015, 08:19:56)
+[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.51)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+如果你电脑上的Python版本低于3，或者尚未安装，可以到Python网站下载并安装[https://www.python.org/downloads/](https://www.python.org/downloads/)
+
+一旦使用了Python 3 ，不用另外安装database。此版本内建了SQLite 数据库。SQLite是个轻量级的数据库，用来支持你做Django开发。如果你要在生产环节部署Django，可以选择更加强有力的数据库系统，例如PostgreSQL，MySQL，或者Oracle。你可以找多关于Django支持的数据库信息[https://docs.djangoproject.com/en/1.8/topics/install/\#database-installation](https://docs.djangoproject.com/en/1.8/topics/install/#database-installation)
+
+## 创建一个独立的Python环境
+
+
+
 
 
