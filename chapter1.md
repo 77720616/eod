@@ -31,7 +31,50 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## 创建一个独立的Python环境
 
+我们非常推荐使用virtualenv 来创建独立的Python环境，这样就可以在不同的项目使用不同的包，而不是混杂在系统默认环境。
 
+另外 一个 优点是可以不用管理员权限也可以安装包。通过以下命令安装virtualenv：
 
+```
+pip install virtualenv 
+```
+
+安装完成后，通过以下命令创建一个独立的环境：
+
+```
+virtualenv my_env
+```
+
+通过这一步创建了包含了Python环境的my\_env/ 目录。所有你安装的Python的库文件都会存放在my\_env/lib/python3.5/site-packages 下。
+
+如果系统中同时安装了Python2.x和Python3.X，你需要指定virtualenv用哪一个。你可以定位Python3安装的路径，并用其按如下方法创建：
+
+```
+zenx$ *which python3*
+/Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+zenx$ *virtualenv my_env -p
+/Library/Frameworks/Python.framework/Versions/3.5/bin/python3*
+```
+
+运行如下命令激活你的虚拟环境：
+
+```
+source
+ my_env/bin/activate
+```
+
+shell提示符将包含你的虚拟环境名字，类似下面
+
+```
+(my_env)laptop:~ zenx$
+```
+
+你可以通过deactivate命令来退出当前虚拟环境。
+
+你可以从这里找到更多关于virtualenv的信息[https://virtualenv.pypa.io/en/latest/](https://virtualenv.pypa.io/en/latest/)
+
+你也可以使用virtualenvwrapper工具来更简单的创建和管理你的虚拟环境，详情参见[http://virtualenvwrapper.readthedocs.org/en/latest/](http://virtualenvwrapper.readthedocs.org/en/latest/)
+
+  
 
 
