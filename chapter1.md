@@ -36,7 +36,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 另外 一个 优点是可以不用管理员权限也可以安装包。通过以下命令安装virtualenv：
 
 ```
-pip install virtualenv 
+pip install virtualenv
 ```
 
 安装完成后，通过以下命令创建一个独立的环境：
@@ -75,6 +75,29 @@ shell提示符将包含你的虚拟环境名字，类似下面
 
 你也可以使用virtualenvwrapper工具来更简单的创建和管理你的虚拟环境，详情参见[http://virtualenvwrapper.readthedocs.org/en/latest/](http://virtualenvwrapper.readthedocs.org/en/latest/)
 
-  
+## 用Pip安装Django
+
+推荐使用pip来安装Django。Python3.5自带了pip，另外也可以从这里下载安装pip[https://pip.pypa.io/](https://pip.pypa.io/)en/stable/installing/。通过下面的命令来安装Django：
+
+```
+pip install Django==1.8.6
+```
+
+Django将被安装在当前虚拟环境的Python site-packages/目录中
+
+下面在命令行中执行python后引入django的的方法可以检查Django是否被成功安装完成：
+
+```
+>>> import django
+>>> django.VERSION
+(1, 7, 0, 'final', 0)
+```
+
+类似上面的输出说明Django已经成功的安装在你的电脑中。
+
+Django安装还有其他多种方式，详情参见[https://docs.djangoproject.com/en/1.8/topics/install/](https://docs.djangoproject.com/en/1.8/topics/install/)
+
+## 创建你的首个项目
+
 
 
