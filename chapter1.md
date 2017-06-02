@@ -178,5 +178,14 @@ python manage.py runserver 127.0.0.1:8001 \
 
 ## 设计博客数据模型
 
+下面我们开始设计博客项目的数据模型，Django内置的一个Python类django.db.models.Model可以完成这个工作。继承这个类的子类的每个属性都对应一个数据表的属性。我们在models.py中定义每个模型，Django提供了API可以很便利的对数据进行操作。
+
+首先，我们先在models.py定义Post模型：
+
+```
+xxx
+```
+
+  
 
 
