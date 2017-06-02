@@ -99,5 +99,44 @@ Django安装还有其他多种方式，详情参见[https://docs.djangoproject.c
 
 ## 创建你的首个项目
 
+我们的首个项目是个完整的博客站点。Django提供了一个简单创建并初始化项目结构的命令，在shell中执行：
+
+```
+django-admin startproject mysite
+```
+
+这条命令创建了一个叫mysite的Djiang项目，项目结构如下：
+
+```
+xxx
+```
+
+这些文件具体作用如下：
+
+manage.py:项目的命令行交互工具，封装了django-admin.py的工具，此文件不用修改。
+
+mysite/:项目目录，包含了如下文件：
+
+```
+__init__.py:一个空文件，声明了该目录是Python的一个模块
+settings.py:项目的配置文件，包含了初始化默认配置。
+urls.py:项目路由配置文件，管理URL和视图的映射
+wsgi.py:配置项目的wsgi参数
+```
+
+通常settings.py文件包含了一个基本配置，包含默认的SQLite数据库配置和默认加载的Django应用。我们在初始化项目的过程中会自动创建这些数据库表。
+
+操作如下：
+
+```
+cd mysite
+python manage.py migrate
+会有类似下面的输出
+xxx
+```
+
+默认应用的数据库已经创建，稍后我们讲介绍migrate命令的相关信息。
+
+  
 
 
