@@ -137,6 +137,36 @@ xxx
 
 默认应用的数据库已经创建，稍后我们讲介绍migrate命令的相关信息。
 
-  
+## 运行项目开发环境
 
+Django自带了一个轻量级的web服务器，方便调试代码，不用花时间调试。而且在Django运行期间，还会自动检测代码的变化。当代码更新时候，会自动重启。
+
+在项目目录中执行下列命令，运行开发服务器
+
+```
+python manage.py runserver
+```
+
+输出大致如下：
+
+```
+xxx
+```
+
+此时，我们在浏览器中访问[http://127.0.0.1:8000/](http://127.0.0.1:8000/)。你将看到下面的页面，提示你项目已经成功运行。
+
+```
+xxx
+```
+
+你也可以制定Django开发服务器运行在指定的ip和端口上，甚至还可以指定一个自定义的配置文件，例如：
+
+```
+python manage.py runserver 127.0.0.1:8001 \
+--settings=mysite.settings
+```
+
+这样在遇到多个环境都有不同配置时候，方便处理。切记这样的配置只适合开发环境，在生产环境，建议使用WSGI方式运行程序，前面加上流行的web服务器，类似Apache，Gunicorn， uWSGI。搭配其他web服务器详见[https://docs.](https://docs.)djangoproject.com/en/1.8/howto/deployment/wsgi/.
+
+在13章会讲述如何生产环境中的Django配置
 
