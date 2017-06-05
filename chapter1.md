@@ -183,8 +183,14 @@ python manage.py runserver 127.0.0.1:8001 \
 首先，我们先在models.py定义Post模型：
 
 ```
-xxx
+xx
 ```
 
+这是博客博文的数据模型，我们定义了如下字段：
 
+title：该字段储存博客标题，CharField类型，自动转换SQL数据库中的为VARCHAR类型
+
+slug：该字段储存URL，该类型仅能储存字母，数字，下划线和中划线，用这个字段存储博客文章优美，适合SEO的URL，增加unique\_for\_date属性记录博客博文的时间。Django可以避免同一时间多个post的拥有相同的slug
+
+author：该字段是外键，定义一个 多对一的关系，即多个博文是一个作者，一个作者写多个博文的关系。Django会创建外键
 
