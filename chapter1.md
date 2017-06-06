@@ -192,5 +192,36 @@ title：该字段储存博客标题，CharField类型，自动转换SQL数据库
 
 slug：该字段储存URL，该类型仅能储存字母，数字，下划线和中划线，用这个字段存储博客文章优美，适合SEO的URL，增加unique\_for\_date属性记录博客博文的时间。Django可以避免同一时间多个post的拥有相同的slug
 
-author：该字段是外键，定义一个 多对一的关系，即多个博文是一个作者，一个作者写多个博文的关系。Django会创建外键
+author：该字段是外键，定义一个 多对一的关系，即多个博文是一个作者，一个作者写多个博文的关系。Django在关系模型中创建外键。在此项目中，我们继承了Django认证组件中的User 模型。我们通过related\_name属性指定反向关系的命名，从User到Post。我们在后面章节会介绍更多。
+
+body：该字段是博文的内容，使用TextField 类型，在数据库中会自动转为TEXT类型。
+
+publish:该字段保存了博文发表的时间。我们使用Djiang中的timezone now 方法结果作为默认值
+
+created:该字段保存了博文的创建时间。因为我们使用了auto\_now\_add，所以保存的是博文创建的时间。
+
+updated: 该字段保存了博文的最后一次修改时间，因为我们用了 auto\_now ，所以会保存博文最后一次的保存时间。
+
+status：该字段显示博文的状态，我们用choices属性，所以只能从给定的值中选择一个。
+
+如上所示，Django自带了多种类型的数据类型来定义数据模型，可从这里找到更多关于Django数据类型的信息：[https://docs.djangoproject.com/](https://docs.djangoproject.com/)en/1.8/ref/models/fields/
+
+模型中的Meta类包含了元数据，我们告诉Django，对数据的查询结果，默认通过publish字段来做降序排序。通过使用-号前缀来指定降序排序。
+
+**str**方法是默认指定对象备注的方法，Django经常使用，比如在admin管理后台。
+
+```
+如果你用的是Python2.X，记得在Python3中所有字符串天生支持unicode，因此我们只需要用__str__()方法，__unicode__() 方法已经被淘汰。
+```
+
+因为我们要处理datatimes，所以我们需要在环境中安装pytz模块，这个模块提供了python和SQLite的timezone处理。在shell或者当前虚拟环境中shell中使用以下命令安装：
+
+```
+pip install pytz
+```
+
+Django自带了timezone-aware datetimes,你可以在settings.py的USE\_TZ字段激活或者关闭支持。默认是True。
+
+  
+
 
