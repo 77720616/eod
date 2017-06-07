@@ -222,6 +222,110 @@ pip install pytz
 
 Django自带了timezone-aware datetimes,你可以在settings.py的USE\_TZ字段激活或者关闭支持。默认是True。
 
+### 激活你的应用
+
+In order for Django to keep track of our application and 创建这个模型的数据库，我们需要激活它，方法是在settings.py中INSTALL\_APPS设置中增加一行blog，例如下面：
+
+```
+xxx
+```
+
+现在Django明白我们的应用是激活状态才可以introspect its models
+
+创建并应用migrations
+
+```
+makemigrations blog
+Migrations for 'blog':
+  blog/migrations/0001_initial.py
+  - Create model Post
+```
+
+```
+sqlmigrate blog 0001
+bash -cl "/Users
+an/alienv/bin/python /Applications/PyCharm.app/Contents/helpers/pycharm/django_manage.py sqlmigrate blog 0001 /Users
+an/PycharmProjects/doe"
+BEGIN;
+--
+-- Create model Post
+--
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(250) NOT NULL, "slug" varchar(250) NOT NULL, "body" text NOT NULL, "publish" datetime NOT NULL, "created" datetime NOT NULL, "updated" datetime NOT NULL, "status" varchar(10) NOT NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+CREATE INDEX "blog_post_slug_b95473f2" ON "blog_post" ("slug");
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id");
+COMMIT;
+```
+
+```
+>
+ migrate
+bash -cl "/Users
+an/alienv/bin/python /Applications/PyCharm.app/Contents/helpers/pycharm/django_manage.py migrate /Users
+an/PycharmProjects/doe"
+Operations to perform:
+  Apply all migrations: admin, auth, blog, contenttypes, sessions
+Running migrations:
+  Applying blog.0001_initial... OK
+  Applying blog.0002_auto_20170606_2324... OK
+```
+
+
+
+创建Admin管理后台来管理模型
+
+创建一个超级用户
+
+将模型注册进Admin管理后台
+
+让我们将blog模型注册进Admin管理后台，编辑blog应用中的admin.py文件，内容类似如下：
+
+```
+from django.contrib import admin
+from .models import Post
+# Register your models here.
+​
+admin.site.register(Post)
+```
+
+定制Admin中模型的显示内容
+
+我们来定制Admin管理后台，修改bolg模块中的admin.py文件修改如下：
+
+```
+from django.contrib import admin
+from .models import Post
+# Register your models here.
+​
+​
+class PostAdmin(admin.ModelAdmin):
+  list_display = ('title','slug','author','publish','status')
+​
+admin.site.register(Post,PostAdmin)
+​
+```
+
+如上图所示可以看到，显示的属性列表正是我们在list\_display中指定的那些。页面的右边新增了一个边栏让你可以对list\_filter中指定的字段对帖子过滤。页面上面增加了一个搜索框，我们可以在其中搜索search\_fields属性内容。在搜索框的下面还有一栏，可以通过时间快速导航，这是通过date\_hierachy属性来实现的。另外可以看到所有博文都按照Status和Publish两个属性来排序的，可以通过ordering属性来设置。
+
+让我们来试试点击“Add post”链接，你将看到一些改变，当你键入博文的title时，slug字段会自动生成。为了实现这个功能，我们需要告诉Django to prepopulate the slug field with the input of the title field 使用prepopulated\_fields 属性，同样现在author字段通过一个查找widget显示，当有大量用户的时候，比下拉框选择好很多，见下面截图：
+
+```
+img
+```
+
+只用几行代码，我们就可以自定义在Admin管理后台模型显示方法。本书稍后，我们将详细描述这些
+
+使用QuerySet 和managers
+
+现在我们已经实现强大的管理后台来管理博客内容，是时候学习如何从数据库来检索这些信息，Django自带了强大的数据库API来让我们创建，检索，升级和删除对象，Django 的ORM（Object-relateional Mapper）兼容MySQL，PostgreSQL，SQLite和Oracle，你可以在项目中的Settings.py DATABASES中定义使用哪个数据库，Django也可以同时运行在多个数据库，而且你可以自由操作这些数据。
+
+当你创建数据模型后Django提供了免费的API来喝数据库交互，你可以在这里找到更多数据模型的参考：
+
+[https://docs.djangoproject.com/en/1.8/ref/models/.](https://docs.djangoproject.com/en/1.8/ref/models/.)
+
+
+
+### 创建对象
+
   
 
 
