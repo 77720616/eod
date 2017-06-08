@@ -322,5 +322,67 @@ img
 
 ### 创建对象
 
+打开终端，输入如下命令打开Python shell
+
+```
+python manage.py shell
+```
+
+输入如下语句：
+
+```
+>
+>
+>
+  from django.contrib.auth.models import User
+>
+>
+>
+  from blog.models import Post
+>
+>
+>
+  user = User.object.get(username='admin')
+>
+>
+>
+ post = Post.objects.create(title='One more post',slug='one-more-post',body='Post body',author=user)
+>
+>
+>
+  post.save()
+```
+
+让我们来一起分析下这些代码，首先我们先检索用户名时admin的User对象：
+
+```
+user = User.objects.get(username='admin')
+```
+
+get\(\)方法允许我们从数据库检索单个对象。Note that this method expects one result that matches the query.如果数据库没有查询到结果，这个方法将抛出一个DoesNotExist异常，二如果数据库返回超过一个的结果，它会抛出一个MultipleObjectsReturned的异常。Both exceptions are attributes of the model class that the query is being performed on.
+
+我么可以创建一个Post实例，指定title, slug,body，并且我们设置user为我们上一步检索出的结果：
+
+```
+ post = Post.objects.create(title='One more post',slug='one-more-post',body='Post body',author=user)
+```
+
+目前这个对象只保存在内存中，还没有在数据库中persisted
+
+最后，我们用save\(\)方法将对象保存到数据库中：
+
+```
+post.save()
+```
+
+这个动作一个insert SQL statement behind the scenes，我们看到了如何先内存中创建一个对象再将其persist到数据库中，其实我们也可以用create\(\)方法直接在数据库中创建：
+
+```
+Post.objects.create(title='One more post',slug='one-more-post',body='Post body',author=user)
+```
+
+
+
+  
 
 
