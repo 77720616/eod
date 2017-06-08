@@ -269,8 +269,6 @@ Running migrations:
   Applying blog.0002_auto_20170606_2324... OK
 ```
 
-
-
 创建Admin管理后台来管理模型
 
 创建一个超级用户
@@ -322,10 +320,7 @@ img
 
 [https://docs.djangoproject.com/en/1.8/ref/models/.](https://docs.djangoproject.com/en/1.8/ref/models/.)
 
-
-
 ### 创建对象
 
-  
 
 
