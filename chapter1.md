@@ -381,7 +381,130 @@ post.save()
 Post.objects.create(title='One more post',slug='one-more-post',body='Post body',author=user)
 ```
 
+### 更新对象
 
+让我们来看如何修改对象，例如修改title：
+
+```
+>
+>
+>
+  post.title = 'New title'
+>
+>
+>
+  post.save()
+```
+
+这个操作时候，save将执行一个UPDATE SQL 操作。
+
+```
+所做的修改至到执行save()方法时，才会实例化到数据库中
+```
+
+### 检索对象
+
+Django 的ORM系统基于QuerySet，一个QuerySet 是一个数据库对象筛选后的集合。上文已经学会了如何用get（）方法查询单个对象。每个Django模型至少有一个manager，默认的manager就是对象，You get a QuerySet object by using your models manager. 如果想从数据库表中取出所有对象，只需要使用all（）method在默认objects manager，like this：
+
+```
+>
+>
+>
+  all_posts = Post.objects.all()
+```
+
+这样我们创建了从数据库表中一个返回所有对象的QuerySet。Notethat this QuerySet has not been executed yet. Django QuerySets are lazy; they are only evaluated when they are forced to do it. This behavior makes QuerySets very ef cient. If we don't set the QuerySet to a variable, but instead write it directly on the Python shell, the SQL statement of the QuerySet is executed because we force it to output results:
+
+```
+>
+>
+>
+  Post.objects.all()
+<
+QuerySet [
+<
+Post: New title
+>
+, 
+<
+Post: One more post
+>
+, 
+<
+Post: greeting morning in wenstday
+>
+, 
+<
+Post: foo
+>
+]
+>
+```
+
+### 使用filter\(\)方法
+
+如果想对一个QuerySet做过滤，可以使用filter（）
+
+方法，如下例，我们可以检索所有在2017年发布的博文：
+
+```
+>
+>
+>
+  part_posts = Post.objects.filter(publish__year=2017)
+```
+
+同样，我们可以通过多个字段过滤，例如，我们可以检索所有username为admin，发布于2017年的博文：
+
+```
+>
+>
+>
+  part_posts = Post.objects.filter(publish__year=2017,author__username='admin')
+```
+
+下面的语句同样可以实现一样的结果：
+
+```
+Post.objects.filter(publish__year=2017)\
+ filter(author__username='admin')
+```
+
+```
+我们在对检索结果进行过滤时使用两个下划线(publish__year),同时在访问关系模型也使用两个下划线(author__username)
+```
+
+### 使用exclude\(\)
+
+我们可以使用exclude（）方法来从QuerySet排除确定的结果，例如，我们可以检索所有开头不为Why的2015年的博文：
+
+```
+Post.objects.filter(publish__year=2015)\
+  .exclude(title__startswith='Why')
+```
+
+使用order\_by\(\)
+
+可以用order\_by\(\)方法对结果字段进行排序，例如我们可以检索所有对象，并用title字段排序：
+
+```
+Post.objects.order_by('title')
+```
+
+默认是升序排序，也可以想下面例子一样用负号前缀做倒序排序：
+
+```
+Post.objects.order_by('-title')
+```
+
+### Deleting objects
+
+如果要删除一个对象,可以从一个对象的实例删除，可以参考以下例子：
+
+```
+post = Post.objects.get(id=1)
+post.delete()
+```
 
   
 
